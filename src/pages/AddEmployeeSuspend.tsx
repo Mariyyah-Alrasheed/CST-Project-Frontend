@@ -25,6 +25,8 @@ export type Employee = {
 };
 
 export function AddEmployeeSuspend({ onClose, selectedType }: Props) {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const [companies, setCompanies] = useState<Company[]>([]);
   const [selectedCompany, setSelectedCompany] = useState<string>("");
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -38,7 +40,7 @@ export function AddEmployeeSuspend({ onClose, selectedType }: Props) {
     const fetchCompanies = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/companies?type=${selectedType}`
+          `${API_BASE_URL}/companies?type=${selectedType}`
         );
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
@@ -49,7 +51,7 @@ export function AddEmployeeSuspend({ onClose, selectedType }: Props) {
       }
     };
     fetchCompanies();
-  }, [selectedType]);
+  }, [API_BASE_URL, selectedType]);
 
   useEffect(() => {
     console.log("Selected Company:", selectedCompany);
@@ -58,7 +60,7 @@ export function AddEmployeeSuspend({ onClose, selectedType }: Props) {
       if (!selectedCompany) return; // Skip if no company is selected
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/company_employees?company_id=${selectedCompany}`
+          `${API_BASE_URL}/company_employees?company_id=${selectedCompany}`
         );
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
@@ -70,7 +72,7 @@ export function AddEmployeeSuspend({ onClose, selectedType }: Props) {
       }
     };
     fetchEmployees();
-  }, [selectedCompany]);
+  }, [API_BASE_URL, selectedCompany]);
 
   const handleSuspendEmployee = async () => {
     if (!selected) {
@@ -84,7 +86,7 @@ export function AddEmployeeSuspend({ onClose, selectedType }: Props) {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/suspended_employees", {
+      const res = await fetch(`${API_BASE_URL}/suspended_employees`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

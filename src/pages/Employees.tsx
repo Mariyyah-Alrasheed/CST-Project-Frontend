@@ -46,6 +46,8 @@ const columns = [
 ];
 
 export function Employees() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const [employees, setEmployees] = useState<SuspendedEmployee[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -70,7 +72,7 @@ export function Employees() {
     const fetchEmployees = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/suspended_employees?company_type=${selectedType}&skip=${skip}&limit=${limit}&search=${debouncedSearchTerm.trim()}`
+          `${API_BASE_URL}/suspended_employees?company_type=${selectedType}&skip=${skip}&limit=${limit}&search=${debouncedSearchTerm.trim()}`
         );
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
@@ -82,7 +84,7 @@ export function Employees() {
     };
 
     fetchEmployees();
-  }, [page, debouncedSearchTerm, skip, limit, selectedType]);
+  }, [page, debouncedSearchTerm, skip, limit, selectedType, API_BASE_URL]);
 
   return (
     <>

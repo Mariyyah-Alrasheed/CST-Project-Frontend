@@ -18,6 +18,8 @@ export type Company = {
 
 //   type: string; // "installation" | "sales";
 export default function Companies() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const [selectedCompanyDetails, setSelectedCompanyDetails] =
     useState<Company | null>(null);
   const [isModelOpen, setIsModalOpen] = useState(false);
@@ -72,8 +74,8 @@ export default function Companies() {
 
         const endpoint =
           selectedType === "installation"
-            ? "http://127.0.0.1:8000/companies_installation"
-            : "http://127.0.0.1:8000/companies_sales";
+            ? `${API_BASE_URL}/companies_installation`
+            : `${API_BASE_URL}/companies_sales`;
 
         const res = await axios.get(endpoint, {
           params: {
@@ -91,7 +93,7 @@ export default function Companies() {
     };
 
     fetchCompanies();
-  }, [page, limit, selectedType, debouncedSearchTerm]);
+  }, [page, limit, selectedType, debouncedSearchTerm, API_BASE_URL]);
 
   useEffect(() => {
     setPage(1);

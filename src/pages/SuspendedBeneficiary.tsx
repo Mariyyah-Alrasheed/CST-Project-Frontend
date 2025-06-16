@@ -34,6 +34,7 @@ export function SuspendedBeneficiary() {
       render: (item: SuspendedBeneficiaryType) => item.suspended_at,
     },
   ];
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const [page, setPage] = useState(1);
   const [limit] = useState(5);
@@ -53,7 +54,7 @@ export function SuspendedBeneficiary() {
     const fetchSuspendedBeneficiaries = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/suspended_beneficiaries?skip=${skip}&limit=${limit}&search=${debouncedSearchTerm.trim()}`
+          `${API_BASE_URL}/suspended_beneficiaries?skip=${skip}&limit=${limit}&search=${debouncedSearchTerm.trim()}`
         );
         if (!res.ok) throw new Error("Network response was not ok");
         const response = await res.json();
@@ -66,7 +67,7 @@ export function SuspendedBeneficiary() {
     };
 
     fetchSuspendedBeneficiaries();
-  }, [skip, limit, debouncedSearchTerm, page]);
+  }, [skip, limit, debouncedSearchTerm, page, API_BASE_URL]);
 
   useEffect(() => {
     setPage(1);

@@ -18,7 +18,7 @@ export default function AddSuspendedModal({ onClose }: Props) {
   const [beneficiary, setBeneficiary] = useState<Beneficiary | null>(null);
   const [notFound, setNotFound] = useState(false);
 
-  const API_BASE_URL = "http://127.0.0.1:8000";
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleAddSuspended = async () => {
     if (!beneficiary) return;
@@ -55,7 +55,7 @@ export default function AddSuspendedModal({ onClose }: Props) {
 
         try {
           const res = await fetch(
-            `http://127.0.0.1:8000/beneficiaries/${idSearchTerm.trim()}`
+            `${API_BASE_URL}/beneficiaries/${idSearchTerm.trim()}`
           );
           if (!res.ok) {
             setBeneficiary(null);
@@ -77,7 +77,7 @@ export default function AddSuspendedModal({ onClose }: Props) {
     }, 500);
 
     return () => clearTimeout(delayDebounce);
-  }, [idSearchTerm]);
+  }, [API_BASE_URL, idSearchTerm]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">

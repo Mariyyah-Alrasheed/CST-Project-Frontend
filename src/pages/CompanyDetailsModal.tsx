@@ -34,6 +34,7 @@ export function CompanyDetailsModal({
     nationality: string;
     phone: string;
   };
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const [serviceProviders, setServiceProviders] = useState<
     ServiceProviderType[]
@@ -50,7 +51,7 @@ export function CompanyDetailsModal({
   useEffect(() => {
     const fetchServiceProviders = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:8000/service_providers");
+        const res = await fetch(`${API_BASE_URL}/service_providers`);
         if (!res.ok) throw new Error("Network response was not ok");
         const response = await res.json();
         setServiceProviders(response);
@@ -59,7 +60,7 @@ export function CompanyDetailsModal({
       }
     };
     fetchServiceProviders();
-  }, []);
+  }, [API_BASE_URL]);
 
   // Fetch company employees with pagination
   useEffect(() => {
@@ -67,7 +68,7 @@ export function CompanyDetailsModal({
     const fetchEmployees = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/company_employees?company_id=${company.id}&skip=${skip}&limit=${limit}`
+          `${API_BASE_URL}/company_employees?company_id=${company.id}&skip=${skip}&limit=${limit}`
         );
         if (!res.ok) throw new Error("Network response was not ok");
         const response = await res.json();
@@ -78,7 +79,7 @@ export function CompanyDetailsModal({
       }
     };
     fetchEmployees();
-  }, [company, skip, limit, page]);
+  }, [company, skip, limit, page, API_BASE_URL]);
 
   const columns = [
     { title: "اسم الموظف", render: (item: CompanyEmployee) => item.name },
