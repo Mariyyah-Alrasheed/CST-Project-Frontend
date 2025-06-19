@@ -92,7 +92,8 @@ export function Employees() {
       <section className="mb-6 justify-between flex">
         <div className="text-sm text-gray-500 gap-2 flex items-center">
           <Button
-            variant={selectedType === "installation" ? "default" : "outline"}
+            variant="default"
+            active={selectedType === "installation"}
             onClick={() => {
               setPage(1); // Reset to first page
               setSelectedType("installation");
@@ -101,7 +102,8 @@ export function Employees() {
             موظفوا التركيب
           </Button>
           <Button
-            variant={selectedType === "sales" ? "default" : "outline"}
+            variant="default"
+            active={selectedType === "sales"}
             onClick={() => {
               setPage(1);
               setSelectedType("sales");

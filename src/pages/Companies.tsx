@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { FileText, Search, Eye } from "lucide-react";
+import { FileText, Eye } from "lucide-react";
 import { useEffect, useState } from "react";
 // import { debounce } from "lodash";
 import { TablePagination } from "@/components/ui/TablePagination";
 import { PaginatedTable } from "@/components/ui/PaginatedTable";
 import { useDebounce } from "use-debounce";
 import { CompanyDetailsModal } from "./CompanyDetailsModal";
+import { MdOutlineSearch } from "react-icons/md";
 
 export type Company = {
   id: number;
@@ -143,19 +144,21 @@ export default function Companies() {
 
   return (
     <>
-      <section className="mb-6 justify-between flex">
+      <section className="mb-4 justify-between flex">
         <div className="text-sm text-gray-500 gap-2 flex items-center">
           <Button
-            variant={selectedType === "installation" ? "default" : "outline"}
-            onClick={() => setSelectedType("installation")}
-          >
-            شركات التركيب
-          </Button>
-          <Button
-            variant={selectedType === "sales" ? "default" : "outline"}
+            variant="default"
+            active={selectedType === "sales"}
             onClick={() => setSelectedType("sales")}
           >
             شركات المبيعات
+          </Button>
+          <Button
+            variant="default"
+            active={selectedType === "installation"}
+            onClick={() => setSelectedType("installation")}
+          >
+            شركات التركيب
           </Button>
         </div>
         <Button
@@ -169,14 +172,15 @@ export default function Companies() {
       </section>
 
       <div className="relative mb-4 w-full max-w-md ml-auto">
-        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2  text-gray-500" />
+        <MdOutlineSearch className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500 w-5 h-5" />
         <input
           type="text"
-          className="w-full border-1 border-gray-300 rounded px-4 py-2 pr-10 text-right placeholder:text-gray-400"
-          placeholder="بحث عن شركة..."
+          className="w-full border border-gray-300  rounded px-4 py-2.5 pr-10 text-right placeholder:text-gray-500 text-sm"
+          placeholder=" يمكنك البحث باسم الشركة أو رقم الشركة الموحد "
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
+
       <div className="mx-auto w-full">
         <PaginatedTable data={filteredCompanies} columns={columns} />
 

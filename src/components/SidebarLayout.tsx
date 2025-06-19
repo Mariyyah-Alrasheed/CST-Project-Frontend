@@ -74,11 +74,11 @@ export default function SidebarLayout() {
 
   return (
     <div className="flex text-right h-170" dir="rtl">
-      <aside className="w-64 bg-white border-l border-gray-200 shadow-md px-4 py-6 flex flex-col gap-2">
+      <aside className="w-64 bg-white border-l border-gray-200 px-4 py-6 flex flex-col gap-2">
         <h2 className="text-xl font-bold text-blue-950 text-right mr-4">
           قائمة الايقاف
         </h2>
-        <hr />
+        <hr className="mb-6" />
         <nav className="flex flex-col gap-3">
           <SidebarButton
             icon={Home}
@@ -111,13 +111,13 @@ export default function SidebarLayout() {
         </nav>
       </aside>
 
-      <div className="w-full border-gray-200 shadow-md px-3 flex flex-col gap-6">
+      <div className="w-full border-gray-200 px-3 flex flex-col mb-1 gap-3">
         <NavigationSection
           icon={FileText}
           title={`${currentSection.title}`}
           description={currentSection.description}
         ></NavigationSection>
-        <main className="flex-1 p-6 bg-white rounded-md shadow-sm">
+        <main className="flex-1 p-6 bg-white rounded-md shadow-lg">
           <Outlet />
         </main>
       </div>
