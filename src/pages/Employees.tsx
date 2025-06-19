@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { AddButton } from "@/components/SidebarLayout";
 import { Button } from "@/components/ui/button";
 import { TablePagination } from "@/components/ui/TablePagination";
-import { CirclePlus, Search } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import { PaginatedTable } from "@/components/ui/PaginatedTable";
 import { useDebounce } from "use-debounce";
 import { AddEmployeeSuspend } from "@/pages/AddEmployeeSuspend";
+import { MdOutlineSearch } from "react-icons/md";
 
 export type SuspendedEmployee = {
   id: number;
@@ -89,18 +90,8 @@ export function Employees() {
   return (
     <>
       {/* Top Bar: Type Selector and Add Button */}
-      <section className="mb-6 justify-between flex">
+      <section className="mb-4 justify-between flex">
         <div className="text-sm text-gray-500 gap-2 flex items-center">
-          <Button
-            variant="default"
-            active={selectedType === "installation"}
-            onClick={() => {
-              setPage(1); // Reset to first page
-              setSelectedType("installation");
-            }}
-          >
-            موظفوا التركيب
-          </Button>
           <Button
             variant="default"
             active={selectedType === "sales"}
@@ -109,7 +100,17 @@ export function Employees() {
               setSelectedType("sales");
             }}
           >
-            موظفوا المبيعات
+            موظفوا شركات المبيعات
+          </Button>
+          <Button
+            variant="default"
+            active={selectedType === "installation"}
+            onClick={() => {
+              setPage(1); // Reset to first page
+              setSelectedType("installation");
+            }}
+          >
+            موظفوا شركات التركيب
           </Button>
         </div>
         <AddButton
@@ -127,12 +128,12 @@ export function Employees() {
       </section>
 
       {/* Search Input */}
+
       <div className="relative mb-4 w-full max-w-md ml-auto">
-        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+        <MdOutlineSearch className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500 w-5 h-5" />
         <input
           type="text"
-          className="w-full border border-gray-300 rounded px-4 py-2 pr-10 text-right placeholder:text-gray-400"
-          placeholder="بحث عن موظف..."
+          className="w-full border border-gray-300  rounded px-4 py-2.5 pr-10 text-right placeholder:text-gray-500 text-sm"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>

@@ -2,9 +2,10 @@ import { AddButton } from "@/components/SidebarLayout";
 import AddSuspendedModal from "@/pages/AddSuspendedModal";
 import { PaginatedTable } from "@/components/ui/PaginatedTable";
 import { TablePagination } from "@/components/ui/TablePagination";
-import { CirclePlus, Search } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import { MdOutlineSearch } from "react-icons/md";
 
 type SuspendedBeneficiaryType = {
   beneficiary_id: string;
@@ -78,15 +79,11 @@ export function SuspendedBeneficiary() {
       <div className="flex justify-between mb-4">
         {/* Search Input */}
         <div className="relative mb-4 w-full max-w-md ml-auto">
-          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+          <MdOutlineSearch className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500 w-5 h-5" />
           <input
             type="text"
-            className="w-full border border-gray-300 rounded px-4 py-2 pr-10 text-right placeholder:text-gray-400"
-            placeholder="بحث عن مستفيد..."
-            onChange={
-              (e) =>
-                setSearchTerm(e.target.value) /* Handle search input change */
-            }
+            className="w-full border border-gray-300  rounded px-4 py-2.5 pr-10 text-right placeholder:text-gray-500 text-sm"
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         <AddButton

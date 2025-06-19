@@ -1,5 +1,11 @@
 // SidebarLayout.tsx
-import { Home, FileText, Settings } from "lucide-react";
+import { FileText } from "lucide-react";
+import { FaRegBuilding, FaUsers } from "react-icons/fa";
+import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
+import { BsFilePersonFill } from "react-icons/bs";
+import { RiListCheck3 } from "react-icons/ri";
+import { PiFileLockBold } from "react-icons/pi";
+
 import { Button } from "@/components/ui/button";
 import { SidebarButton } from "@/components/SidebarButton"; // Assuming you have a SidebarButton component
 import { NavigationSection } from "@/components/NavigationSection";
@@ -44,17 +50,17 @@ export default function SidebarLayout() {
     }
   > = {
     companies: {
-      icon: Home,
+      icon: HiOutlineBuildingOffice2,
       title: "شركات المبيعات والتركيب",
       description: "إدارة الشركات التي تقدم خدمات المبيعات والتركيب.",
     },
     employees: {
-      icon: FileText,
+      icon: PiFileLockBold,
       title: "موظفوا المبيعات والتركيب",
       description: "إدارة موظفي المبيعات والتركيب.",
     },
     beneficiaries: {
-      icon: Settings,
+      icon: PiFileLockBold,
       title: "المستفيدون",
       description: "إدارة المستفيدين من خدمات الشركات.",
     },
@@ -81,28 +87,28 @@ export default function SidebarLayout() {
         <hr className="mb-6" />
         <nav className="flex flex-col gap-3">
           <SidebarButton
-            icon={Home}
+            icon={FaRegBuilding}
             id="companies"
             label="شركات المبيعات والتركيب"
             onClick={() => navigate("/companies")}
             isActive={location.pathname === "/companies"}
           />
           <SidebarButton
-            icon={FileText}
+            icon={BsFilePersonFill}
             id="amploey"
             label="موظفوا المبيعات والتركيب"
             onClick={() => navigate("employees")}
             isActive={location.pathname === "/employees"}
           />
           <SidebarButton
-            icon={Settings}
+            icon={FaUsers}
             id="benifit"
             label="المستفيدون"
             onClick={() => navigate("beneficiaries")}
             isActive={location.pathname === "/beneficiaries"}
           />
           <SidebarButton
-            icon={FileText}
+            icon={RiListCheck3}
             id="requests"
             label="طلبات الايقاف"
             onClick={() => navigate("requests")}
@@ -113,7 +119,7 @@ export default function SidebarLayout() {
 
       <div className="w-full border-gray-200 px-3 flex flex-col mb-1 gap-3">
         <NavigationSection
-          icon={FileText}
+          icon={currentSection.icon}
           title={`${currentSection.title}`}
           description={currentSection.description}
         ></NavigationSection>

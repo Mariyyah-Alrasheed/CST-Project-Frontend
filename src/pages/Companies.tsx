@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { FileText, Eye } from "lucide-react";
 import { useEffect, useState } from "react";
+import { IoMdEye, IoIosArrowDown } from "react-icons/io";
+import { BsChatSquareText } from "react-icons/bs";
+
 // import { debounce } from "lodash";
 import { TablePagination } from "@/components/ui/TablePagination";
 import { PaginatedTable } from "@/components/ui/PaginatedTable";
@@ -136,7 +138,7 @@ export default function Companies() {
             console.log("Selected ID:", item.id);
           }}
         >
-          <Eye size={16} />
+          <IoMdEye size={16} />
         </Button>
       ),
     },
@@ -164,10 +166,11 @@ export default function Companies() {
         <Button
           onClick={() => downloadCSV(filteredCompanies)}
           variant="outline"
-          className="flex gap-1 items-center"
+          className="flex gap-1 items-center text-blue-950 font-bold"
         >
-          <FileText size={18} />
+          <BsChatSquareText size={18} className="mt-0.5" />
           اصدار تقرير
+          <IoIosArrowDown size={4} className="mt-0.5" />
         </Button>
       </section>
 
