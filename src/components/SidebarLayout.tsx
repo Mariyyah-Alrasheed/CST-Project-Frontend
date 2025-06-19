@@ -56,7 +56,7 @@ export default function SidebarLayout() {
     },
     employees: {
       icon: PiFileLockBold,
-      title: "موظفوا المبيعات والتركيب",
+      title: "موظفوا شركات المبيعات والتركيب",
       description: "إدارة موظفي المبيعات والتركيب.",
     },
     beneficiaries: {

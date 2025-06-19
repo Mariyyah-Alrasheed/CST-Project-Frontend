@@ -30,7 +30,7 @@ export default function Companies() {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [limit] = useState(4);
+  const [limit] = useState(6);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500); // Debounce search term
 
@@ -130,7 +130,7 @@ export default function Companies() {
       render: (item: Company) => (
         <Button
           variant="ghost"
-          className="flex items-center gap-1"
+          className="w-0.5 h-1"
           onClick={() => {
             setSelectedCompanyDetails(item);
             setIsModalOpen(true);
@@ -138,7 +138,7 @@ export default function Companies() {
             console.log("Selected ID:", item.id);
           }}
         >
-          <IoMdEye size={16} />
+          <IoMdEye />
         </Button>
       ),
     },
@@ -184,28 +184,26 @@ export default function Companies() {
         />
       </div>
 
-      <div className="mx-auto w-full">
-        <PaginatedTable data={filteredCompanies} columns={columns} />
+      <PaginatedTable data={filteredCompanies} columns={columns} />
 
-        <TablePagination
-          page={page}
-          limit={limit}
-          total={total}
-          onPageChange={setPage}
+      <TablePagination
+        page={page}
+        limit={limit}
+        total={total}
+        onPageChange={setPage}
+      />
+      {/* Modal for company details */}
+      {/* Ensure the modal is only rendered when a company is selected */}
+      {selectedCompanyDetails && (
+        <CompanyDetailsModal
+          company={selectedCompanyDetails}
+          open={isModelOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedCompanyDetails(null);
+          }}
         />
-        {/* Modal for company details */}
-        {/* Ensure the modal is only rendered when a company is selected */}
-        {selectedCompanyDetails && (
-          <CompanyDetailsModal
-            company={selectedCompanyDetails}
-            open={isModelOpen}
-            onClose={() => {
-              setIsModalOpen(false);
-              setSelectedCompanyDetails(null);
-            }}
-          />
-        )}
-      </div>
+      )}
     </>
   );
 }

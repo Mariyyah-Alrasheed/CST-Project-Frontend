@@ -6,6 +6,8 @@ import { CirclePlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { MdOutlineSearch } from "react-icons/md";
+import { Button } from "@/components/ui/button";
+import { PiLockKeyOpenFill } from "react-icons/pi";
 
 type SuspendedBeneficiaryType = {
   beneficiary_id: string;
@@ -30,9 +32,21 @@ export function SuspendedBeneficiary() {
       title: "رقم الهوية الوطنية",
       render: (item: SuspendedBeneficiaryType) => item.beneficiary.national_id,
     },
+    // {
+    //   title: "تاريخ الإيقاف",
+    //   render: (item: SuspendedBeneficiaryType) => item.suspended_at,
+    // },
     {
-      title: "تاريخ الإيقاف",
-      render: (item: SuspendedBeneficiaryType) => item.suspended_at,
+      title: " الاجراءات",
+      render: () => (
+        <Button
+          variant="ghost"
+          className="w-0.5 h-1"
+          // Handle view details action here
+        >
+          <PiLockKeyOpenFill />
+        </Button>
+      ),
     },
   ];
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;

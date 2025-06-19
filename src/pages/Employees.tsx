@@ -7,6 +7,8 @@ import { PaginatedTable } from "@/components/ui/PaginatedTable";
 import { useDebounce } from "use-debounce";
 import { AddEmployeeSuspend } from "@/pages/AddEmployeeSuspend";
 import { MdOutlineSearch } from "react-icons/md";
+// import { IoMdEye } from "react-icons/io";
+import { PiLockKeyOpenFill } from "react-icons/pi";
 
 export type SuspendedEmployee = {
   id: number;
@@ -40,9 +42,21 @@ const columns = [
     title: "رقم الهوية|الاقامة",
     render: (item: SuspendedEmployee) => item.employee.national_id,
   },
+  // {
+  //   title: "رقم الوظيفة",
+  //   render: (item: SuspendedEmployee) => item.employee.job_number,
+  // },
   {
-    title: "رقم الوظيفة",
-    render: (item: SuspendedEmployee) => item.employee.job_number,
+    title: " الاجراءات",
+    render: () => (
+      <Button
+        variant="ghost"
+        className="w-0.5 h-1"
+        // Handle view details action here
+      >
+        <PiLockKeyOpenFill />
+      </Button>
+    ),
   },
 ];
 
@@ -57,7 +71,7 @@ export function Employees() {
   const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false);
 
   const [page, setPage] = useState(1);
-  const [limit] = useState(5);
+  const [limit] = useState(4);
   const [selectedType, setSelectedType] =
     useState<SelectedEmployeeType>("installation");
 
@@ -91,7 +105,7 @@ export function Employees() {
     <>
       {/* Top Bar: Type Selector and Add Button */}
       <section className="mb-4 justify-between flex">
-        <div className="text-sm text-gray-500 gap-2 flex items-center">
+        <div className="text-sm text-gray-500 gap-5 flex items-center">
           <Button
             variant="default"
             active={selectedType === "sales"}

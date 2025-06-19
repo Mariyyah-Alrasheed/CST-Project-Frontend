@@ -44,7 +44,7 @@ export function CompanyDetailsModal({
   );
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState(1);
-  const [limit] = useState(3);
+  const [limit] = useState(5);
   const skip = (page - 1) * limit;
 
   // Fetch service providers
@@ -98,10 +98,10 @@ export function CompanyDetailsModal({
   return (
     <Dialog open={open && !!company} onOpenChange={onClose}>
       {company && (
-        <DialogContent dir="rtl">
+        <DialogContent dir="rtl" className="px-9">
           <DialogHeader
-            className="mb-2"
-            style={{ boxShadow: "0 4px 4px -2px rgba(0, 0, 0, 0.15)" }}
+            className="mb-4"
+            // style={{ boxShadow: "0 4px 4px -2px rgba(0, 0, 0, 0.15)" }}
           >
             <DialogTitle className="text-lg font-bold text-blue-950">
               {company.name}
@@ -111,39 +111,39 @@ export function CompanyDetailsModal({
             </DialogDescription>
           </DialogHeader>
 
-          <h2 className="text-right font-semibold mb-4 text-lg text-gray-700">
+          <h2 className="text-right font-semibold mb-6 text-lg text-black-800">
             بيانات الشركة
           </h2>
 
-          <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-right">
+          <div className="m-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-right w-8/12">
             <div>
-              <div className="font-semibold mb-1">اسم الشركة</div>
-              <div>{company.name}</div>
+              <div className="mb-3">اسم الشركة</div>
+              <div className="font-semibold">{company.name}</div>
             </div>
             <div>
-              <div className="font-semibold mb-1">رقم السجل التجاري (CR)</div>
-              <div>{company.commercial_number}</div>
+              <div className="mb-3">رقم السجل التجاري (CR)</div>
+              <div className="font-semibold">{company.commercial_number}</div>
             </div>
             <div>
-              <div className="font-semibold mb-1">الرقم الموحد للمنشأة</div>
-              <div>{company.unified_number}</div>
+              <div className="mb-3">الرقم الموحد للمنشأة</div>
+              <div className="font-semibold">{company.unified_number}</div>
             </div>
           </div>
 
-          <h2 className="text-right font-semibold mt-1 text-lg text-gray-700">
-            المتعاقدين مع مقدمي الخدمات
+          <h2 className="text-right font-semibold mt-12 text-lg text-black-800">
+            المتعاقدين مع مقدمي الخدمات ({serviceProviders.length})
           </h2>
 
           <table className="w-[25vw] mt-4 justify-items-center text-right">
             <thead>
-              <tr className="bg-blue-100">
+              <tr className="bg-[#d6e0f7] text-blue-950 font-bold">
                 <th className="px-4 py-2">اسم مقدم الخدمة</th>
                 <th className="px-4 py-2">الرمز</th>
               </tr>
             </thead>
             <tbody>
               {serviceProviders.map((provider) => (
-                <tr key={provider.id} className="border-b">
+                <tr key={provider.id}>
                   <td className="px-4 py-2">{provider.name}</td>
                   <td className="px-4 py-2">{provider.code}</td>
                 </tr>
@@ -151,14 +151,15 @@ export function CompanyDetailsModal({
             </tbody>
           </table>
 
-          <h2 className="text-right font-semibold mt-2 text-lg text-gray-700">
-            الموظفين
+          <h2 className="text-right font-semibold my-4 text-lg text-black-800">
+            الموظفين ({total})
           </h2>
 
           <PaginatedTable
             data={companyEmployees}
             columns={columns}
-            headerClassName="bg-blue-100"
+            headerClassName="bg-[#d6e0f7]" // لون الخلفية اللي تبينه
+            ClassNameRow="border-none"
           />
           <TablePagination
             total={total}

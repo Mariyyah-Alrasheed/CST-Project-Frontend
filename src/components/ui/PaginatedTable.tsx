@@ -16,21 +16,23 @@ type PaginatedTableProps<T> = {
   data: T[];
   columns: Column<T>[];
   headerClassName?: string;
+  ClassNameRow?: string;
 };
 
 export function PaginatedTable<T>({
   data,
   columns,
   headerClassName = "",
+  ClassNameRow = "",
 }: PaginatedTableProps<T>) {
   return (
     <Table className="min-w-full divide-y divide-blue-950 text-center">
       <TableHeader className={`font-bold text-blue-950 ${headerClassName}`}>
-        <TableRow>
+        <TableRow className={`${ClassNameRow}`}>
           {columns.map((col, idx) => (
             <TableHead
               key={idx}
-              className="px-6 py-3 text-l text-blue-950 uppercase tracking-wider text-center font-bold"
+              className="px-2 py-2 text-l text-blue-950 uppercase tracking-wider text-center font-bold"
             >
               {col.title}
             </TableHead>
@@ -39,7 +41,7 @@ export function PaginatedTable<T>({
       </TableHeader>
       <TableBody className="bg-white divide-y divide-gray-200">
         {data.map((item: any, i: number) => (
-          <TableRow key={(item as any).id ?? i}>
+          <TableRow key={(item as any).id ?? i} className={ClassNameRow}>
             {columns.map((col, idx) => (
               <TableCell
                 key={idx}
